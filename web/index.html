@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS Request Example</title>
+</head>
+<body>
+    <h1>CORS Request Example</h1>
+    <input type="text" id="urlInput" placeholder="Enter URL">
+    <button onclick="makeCORSRequest()">Make CORS Request with XHR</button>
+    <button onclick="makeFetchRequest()">Make CORS Request with fetch</button>
+
+    <div id="result"></div>
+
+    <script>
+        function makeCORSRequest() {
+            var xhr = new XMLHttpRequest();
+            var url = document.getElementById('urlInput').value || '';
+        
+            xhr.open('GET', url, true);
+        
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        document.getElementById('result').innerHTML = 'Response: ' + xhr.responseText;
+                    } else {
+                        document.getElementById('result').innerHTML = 'Error: ' + xhr.status;
+                    }
+                }
+            };
+        
+            xhr.onerror = function() {
+                document.getElementById('result').innerHTML = 'Request failed';
+            };
+        
+            xhr.send();
+        }
+        
+        function makeFetchRequest() {
+            var url = document.getElementById('urlInput').value || '';
+        
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('HTTP error ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('result').innerHTML = 'Response: ' + data;
+                })
+                .catch(error => {
+                    document.getElementById('result').innerHTML = 'Error: ' + error.message;
+                });
+        }
+    </script>
+</body>
+</html>
