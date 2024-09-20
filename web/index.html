@@ -7,7 +7,8 @@
 </head>
 <body>
     <h1>CORS Request Example</h1>
-    <input type="text" id="urlInput" placeholder="Enter URL">
+    <input type="text" id="urlInput" style="min-width:480px" placeholder="https://wapo-testnet.phala.network/ipfs/QmcBkVqUWGgsVuaJRgD15NuqY6sc6m6TVs4wsUNzHT5F4r" />
+    <br />
     <button onclick="makeCORSRequest()">Make CORS Request with XHR</button>
     <button onclick="makeFetchRequest()">Make CORS Request with fetch</button>
 
@@ -16,7 +17,7 @@
     <script>
         function makeCORSRequest() {
             var xhr = new XMLHttpRequest();
-            var url = document.getElementById('urlInput').value || '';
+            var url = document.getElementById('urlInput').value || 'https://wapo-testnet.phala.network/ipfs/QmcBkVqUWGgsVuaJRgD15NuqY6sc6m6TVs4wsUNzHT5F4r';
         
             xhr.open('GET', url, true);
         
@@ -38,7 +39,7 @@
         }
         
         function makeFetchRequest() {
-            var url = document.getElementById('urlInput').value || '';
+            var url = document.getElementById('urlInput').value || 'https://wapo-testnet.phala.network/ipfs/QmcBkVqUWGgsVuaJRgD15NuqY6sc6m6TVs4wsUNzHT5F4r';
         
             fetch(url)
                 .then(response => {
